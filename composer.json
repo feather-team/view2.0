@@ -7,10 +7,8 @@
             "email": "jsyczhanghao@sina.com"
         }
     ],
-    "require": {
-
-    },
+    "require": {},
     "autoload": {
-        "psr-4": {"Feather": "src/"}
+        "psr-4": {"Feather\\": "src/"}
     }
 }

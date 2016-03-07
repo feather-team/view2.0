@@ -1,0 +1,16 @@
+{
+    "name": "feather/view2",
+    "description": "feathers view 2.x",
+    "authors": [
+        {
+            "name": "zhanghao",
+            "email": "jsyczhanghao@sina.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {"Feather": "src/"}
+    }
+}

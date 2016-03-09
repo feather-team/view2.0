@@ -150,7 +150,7 @@ class Engine{
             $filename489bc39ff0 = $this->tmp_dir . '/' . str_replace('/', '_', $path489bc39ff0) . uniqid() . '.php';
             file_put_contents($filename489bc39ff0, $content489bc39ff0);
             include $filename489bc39ff0;
-            unlink($filename489bc39ff0)
+            unlink($filename489bc39ff0);
         }else{
             //evaluate code
             eval("?> {$content489bc39ff0}");

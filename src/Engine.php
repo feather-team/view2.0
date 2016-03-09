@@ -109,7 +109,11 @@ class Engine{
         //2.0使用ns方式
         $nsClassName = '\\' . __NAMESPACE__ . '\\Plugin\\' . Helper::ul2camel($name);
 
-        if(!class_exists($previousClassName) && !class_exists($nsClassName)){
+        if(class_exists($previousClassName)){
+            $realClassName = $previousClassName;
+        }else if(class_exists($nsClassName)){
+            $realClassName = $nsClassName;
+        }else{
             $pluginDirs = $this->getPluginsDir();
             $previousClassFile = strtolower($previousClassName);
 

@@ -2,7 +2,7 @@
 namespace FeatherView;
 
 class Engine{
-	//默认后缀
+    //默认后缀
     const DEFAULT_SUFFIX = '.tpl';
 
     //模版目录，可为数组
@@ -42,7 +42,7 @@ class Engine{
 
     //执行模版返回
     public function fetch($path, $data = null, $method = null){
-        if($realpath = Helper::foundPath($this->template_dir, $path, $this->suffix)){
+        if($realpath = Helper::findFile($this->template_dir, $path, $this->suffix)){
             if($data){
                 $data = array_merge($this->data, $data);
             }else{
@@ -100,31 +100,29 @@ class Engine{
 
     //获取plugin实例
     public function plugin($name, $opt = null){
-    	//兼容1.x
-        $previousClassName = 'Feather_View_Plugin_' . Helper::ul2camel($name, false);
+        if(isset($this->pluginsObject[$name])){
+            return $this->pluginsObject[$name];
+        }
+
+        //兼容1.x
+        $previousClassName = 'Feather_View_Plugin_' . Helper::ul2camel($name, true);
         //2.0使用ns方式
-        $nsClassName = __NAMESPACE__ . '\\Plugin\\' . Helper::ul2camel($name);
+        $nsClassName = '\\' . __NAMESPACE__ . '\\Plugin\\' . Helper::ul2camel($name);
 
         if(!class_exists($previousClassName) && !class_exists($nsClassName)){
             $pluginDirs = $this->getPluginsDir();
             $previousClassFile = strtolower($previousClassName);
 
             if(Helper::loadFile($pluginDirs, $previousClassFile)){
-            	$realClassName = $previousClassName;
+                $realClassName = $previousClassName;
             }else if(Helper::loadFile($pluginDirs, $name)){
-            	$realClassName = $nsClassName;
+                $realClassName = $nsClassName;
             }else{
-            	throw new \Exception("plugin [{$name}] is not exists!");
+                throw new \Exception("plugin [{$name}] is not exists!");
             }
         }
 
-        if(!isset($this->pluginsObject[$name])){
-            $obj = $this->pluginsObject[$name] = new $realClassName($opt, $this);
-        }else{
-            $obj = $this->pluginsObject[$name];
-        }
-
-        return $obj;
+        return $this->pluginsObject[$name] = new $realClassName($opt, $this);
     }
 
     protected function getPluginsDir(){

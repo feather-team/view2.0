@@ -1,6 +1,6 @@
 {
-    "name": "feather/view2",
-    "description": "feather view 2.x",
+    "name": "feather/view",
+    "description": "feather's template engine",
     "authors": [
         {
             "name": "zhanghao",

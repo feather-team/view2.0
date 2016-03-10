@@ -81,7 +81,7 @@ class Engine{
 
     //内嵌加载一个文件
     public function load($path, $data = null){
-        echo $this->fetch("{$path}", $data, __METHOD__);
+        echo $this->fetch($path, $data, __METHOD__);
     }
 
     //注册一个系统级插件，该插件会在display或者fetch时，自动调用

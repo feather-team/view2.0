@@ -2,6 +2,32 @@
 namespace FeatherView;
 
 class Helper{
+    public static function mkdir($dir, $mod = 0777){
+        if(is_dir($dir)){
+            return true;
+        }else{
+            $old = umask(0);
+
+            if(@mkdir($dir, $mod, true) && is_dir($dir)){
+                umask($old);
+                return true;
+            } else {
+                umask($old);
+            }
+        }
+
+        return false;
+    }
+
+    public static function readFile($file){
+        return file_get_contents($file);
+    }
+
+    public static function writeFile($file, $content){
+        self::mkdir(dirname($file));
+        file_put_contents($file, $content);
+    }
+
     /**
      * 遍历查找某一个文件的绝对路径
      * @param  array|string dirs:需要遍历的目录

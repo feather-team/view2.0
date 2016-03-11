@@ -1,14 +1,15 @@
 <?php
 namespace FeatherView\Plugin;
+use FeatherView;
 
 /**
  * 系统级插件基类
  */
-abstract class SystemAbstract{
+abstract class SystemPluginAbstract{
 	protected $options = array();
 	protected $view;
 
-	public function __construct($opt = array(), \FeatherView\Engine $view){
+	public function __construct($opt = array(), FeatherView\Engine $view){
 		$this->options = (array)$opt;
 		$this->view = $view;
 		$this->initialize();

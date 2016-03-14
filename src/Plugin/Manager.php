@@ -3,26 +3,26 @@ namespace FeatherView\Plugin;
 use FeatherView;
 
 class Manager{
-	protected $dirs = array();
-	protected $engine;
-	protected $systemItems = array();
-	protected $instances = array();
+    protected $dirs = array();
+    protected $engine;
+    protected $systemItems = array();
+    protected $instances = array();
 
-	public function __construct(FeatherView\Engine $engine, $dir = null){
-		$this->engine = $engine;
+    public function __construct(FeatherView\Engine $engine, $dir = null){
+        $this->engine = $engine;
         $dir && $this->setPluginDir($dir);
-	}
+    }
 
     public function registerSystemPlugin($name, $opt = null){
         $this->systemItems[$name] = $opt;
     }
 
     public function callSystemPlugins($content, $info = array()){
-    	foreach($this->systemItems as $name => $opt){
-    		$content = $this->instance($name, $opt)->exec($content, $info);
-    	}
+        foreach($this->systemItems as $name => $opt){
+            $content = $this->instance($name, $opt)->exec($content, $info);
+        }
 
-    	return $content;
+        return $content;
     }
 
     //获取plugin实例
@@ -53,7 +53,7 @@ class Manager{
 
     public function setPluginDir($dir = '/'){
         $this->dirs = (array)$dir;
-	}
+    }
 
     public function addPluginDir($dir = '/'){
         $this->dirs = array_merge($this->dirs, (array)$dir);
